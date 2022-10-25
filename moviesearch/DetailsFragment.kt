@@ -29,6 +29,7 @@ class DetailsFragment : Fragment() {
     }
     private fun setFilmsDetails() {
         val film = arguments?.get("film") as Film
+
         binding.detailsToolbar.title = film.title
         binding.detailsPoster.setImageResource(film.poster)
         binding.detailsDescription.text = film.description

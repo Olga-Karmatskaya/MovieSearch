@@ -23,9 +23,7 @@ class MainActivity : AppCompatActivity() {
         }
         fun launchDetailsFragment(film: Film) {
             val bundle = Bundle()
-            //Кладем наш фильм в "посылку"
             bundle.putParcelable("film", film)
-            //Кладем фрагмент с деталями в перменную
             val fragment = DetailsFragment()
             fragment.arguments = bundle
 

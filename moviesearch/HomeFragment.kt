@@ -42,9 +42,10 @@ class HomeFragment : Fragment() {
                 override fun click(film: Film) {
                     (requireActivity() as MainActivity).launchDetailsFragment(film)
                 }
-            })
-           adapter = filmsAdapter
-            layoutManager = LinearLayoutManager(requireContext())
+            }
+            )
+            adapter = filmsAdapter
+            layoutManager = LinearLayoutManager(this@MainActivity)
             val decorator = TopSpacingItemDecoration(8)
             addItemDecoration(decorator)
         }

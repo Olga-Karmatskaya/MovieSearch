@@ -2,6 +2,7 @@ package com.example.moviesearch
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.example.moviesearch.databinding.FilmItemBinding
 
 class FilmViewHolder(itemView: FilmItemBinding) : RecyclerView.ViewHolder(itemView) {
 

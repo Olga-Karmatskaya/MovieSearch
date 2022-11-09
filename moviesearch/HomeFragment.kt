@@ -37,7 +37,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        main_recycler.apply {
+        binding.mainRecycler.apply {
             filmsAdapter = FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener{
                 override fun click(film: Film) {
                     (requireActivity() as MainActivity).launchDetailsFragment(film)
@@ -45,7 +45,7 @@ class HomeFragment : Fragment() {
             }
             )
             adapter = filmsAdapter
-            layoutManager = LinearLayoutManager(this@MainActivity)
+            layoutManager = LinearLayoutManager(requireContext())
             val decorator = TopSpacingItemDecoration(8)
             addItemDecoration(decorator)
         }

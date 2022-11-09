@@ -17,13 +17,12 @@ class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener) : 
         when (holder) {
             is FilmViewHolder -> {
                 holder.bind(items[position])
-                holder.itemView.item_container.setOnClickListener {
+                holder.itemView.setOnClickListener {
                     clickListener.click(items[position])
                 }
             }
         }
     }
-
     fun addItems(list: List<Film>) {
         items.clear()
         items.addAll(list)

@@ -4,7 +4,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviesearch.databinding.FilmItemBinding
 
-class FilmViewHolder(itemView: FilmItemBinding) : RecyclerView.ViewHolder(itemView) {
+class FilmViewHolder(itemView: FilmItemBinding) : RecyclerView.ViewHolder(itemView.root) {
 
     private val title = itemView.title
     private val poster = itemView.poster

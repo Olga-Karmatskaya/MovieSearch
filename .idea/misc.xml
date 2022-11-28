@@ -4,7 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/User/AndroidStudioProjects/MovieSearch/app/src/main/res/drawable/background.xml" value="0.1305" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/MovieSearch/app/src/main/res/drawable/background_favorites.xml" value="0.2405" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/MovieSearch/app/src/main/res/drawable/background_home.xml" value="0.2405" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/MovieSearch/app/src/main/res/drawable/background_main.xml" value="0.2405" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MovieSearch/app/src/main/res/drawable/background_search_view.xml" value="0.2405" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/MovieSearch/app/src/main/res/drawable/background_selections.xml" value="0.2405" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/MovieSearch/app/src/main/res/drawable/background_watch_later.xml" value="0.2405" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MovieSearch/app/src/main/res/drawable/corner_background.xml" value="0.2445" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MovieSearch/app/src/main/res/drawable/ic_launcher_background.xml" value="0.124" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MovieSearch/app/src/main/res/drawable/ic_round_favorite.xml" value="0.2445" />
@@ -19,6 +24,9 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/MovieSearch/app/src/main/res/layout/fragment_details.xml" value="0.11302083333333333" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MovieSearch/app/src/main/res/layout/fragment_favorites.xml" value="0.25052083333333336" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MovieSearch/app/src/main/res/layout/fragment_home.xml" value="0.11041666666666666" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/MovieSearch/app/src/main/res/layout/fragment_selections.xml" value="0.25052083333333336" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/MovieSearch/app/src/main/res/layout/fragment_watch_later.xml" value="0.23645833333333333" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/MovieSearch/app/src/main/res/layout/merge_home_screen_content.xml" value="0.25052083333333336" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MovieSearch/app/src/main/res/menu/navigation_menu.xml" value="0.253125" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MovieSearch/app/src/main/res/menu/toolbar_menu.xml" value="0.25416666666666665" />
       </map>

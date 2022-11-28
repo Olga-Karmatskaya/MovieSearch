@@ -9,6 +9,11 @@ import android.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moviesearch.databinding.FragmentDetailsBinding
 import com.example.moviesearch.databinding.FragmentHomeBinding
+import android.transition.Scene
+import android.transition.Slide
+import android.transition.TransitionManager
+import android.transition.TransitionSet
+import android.view.Gravity
 import java.util.*
 
 class HomeFragment : Fragment() {
@@ -69,7 +74,9 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.searchView.setOnClickListener {
+        AnimationHelper.performFragmentCircularRevealAnimation(binding.homeFragmentRoot, requireActivity(), 1)
+
+       binding.searchView.setOnClickListener {
             binding.searchView.isIconified = false
         }
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,

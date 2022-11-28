@@ -3,6 +3,7 @@ package com.example.moviesearch
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviesearch.databinding.FilmItemBinding
+import com.bumptech.glide.Glide
 
 class FilmViewHolder(itemView: FilmItemBinding) : RecyclerView.ViewHolder(itemView.root) {
 
@@ -12,7 +13,10 @@ class FilmViewHolder(itemView: FilmItemBinding) : RecyclerView.ViewHolder(itemVi
 
     fun bind(film: Film) {
         title.text = film.title
-        poster.setImageResource(film.poster)
+        Glide.with(itemView)
+            .load(film.poster)
+            .centerCrop()
+            .into(poster)
         description.text = film.description
     }
 }

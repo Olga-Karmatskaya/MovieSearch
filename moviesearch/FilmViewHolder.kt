@@ -11,6 +11,8 @@ class FilmViewHolder(itemView: FilmItemBinding) : RecyclerView.ViewHolder(itemVi
     private val poster = itemView.poster
     private val description = itemView.description
 
+    private val ratingDonut = itemView.ratingDonut
+
     fun bind(film: Film) {
         title.text = film.title
         Glide.with(itemView)
@@ -18,5 +20,6 @@ class FilmViewHolder(itemView: FilmItemBinding) : RecyclerView.ViewHolder(itemVi
             .centerCrop()
             .into(poster)
         description.text = film.description
+        ratingDonut.setProgress((film.rating * 10).toInt())
     }
 }

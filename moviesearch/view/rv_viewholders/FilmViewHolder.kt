@@ -1,10 +1,10 @@
-package com.example.moviesearch
+package com.example.moviesearch.view.rv_viewholders
 
-import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviesearch.databinding.FilmItemBinding
+import com.example.moviesearch.domain.Film
 
-class FilmViewHolder(itemView: FilmItemBinding) : RecyclerView.ViewHolder(itemView) {
+class FilmViewHolder(itemView: FilmItemBinding) : RecyclerView.ViewHolder(itemView.root) {
 
     private val title = itemView.title
     private val poster = itemView.poster

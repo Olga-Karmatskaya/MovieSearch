@@ -1,9 +1,13 @@
-package com.example.moviesearch
+package com.example.moviesearch.view
 
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.moviesearch.R
 import com.example.moviesearch.databinding.ActivityMainBinding
+import com.example.moviesearch.domain.Film
+import com.example.moviesearch.view.fragments.DetailsFragment
+import com.example.moviesearch.view.fragments.HomeFragment
 
 class MainActivity : AppCompatActivity() {
      private lateinit var binding: ActivityMainBinding

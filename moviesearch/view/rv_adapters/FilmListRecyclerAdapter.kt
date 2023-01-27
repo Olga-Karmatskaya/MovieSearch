@@ -1,9 +1,11 @@
-package com.example.moviesearch
+package com.example.moviesearch.view.rv_adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviesearch.databinding.FilmItemBinding
+import com.example.moviesearch.domain.Film
+import com.example.moviesearch.view.rv_viewholders.FilmViewHolder
 
 class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val items = mutableListOf<Film>()
@@ -17,7 +19,7 @@ class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener) : 
         when (holder) {
             is FilmViewHolder -> {
                 holder.bind(items[position])
-                holder.itemView.item_container.setOnClickListener {
+                holder.itemView.setOnClickListener {
                     clickListener.click(items[position])
                 }
             }

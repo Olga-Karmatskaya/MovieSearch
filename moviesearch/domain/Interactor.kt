@@ -15,7 +15,11 @@ import retrofit2.Response
         fun getFilmsFromApi(page: Int, callback: HomeFragmentViewModel.ApiCallback) {
             retrofitService.getFilms(getDefaultCategoryFromPreferences(), API.Key, "ru-RU", page).enqueue(object : Callback<TmdbResults> {
                 override fun onResponse(call: Call<TmdbResults>, response: Response<TmdbResults>) {
-                    callback.onSuccess(Converter.convertApiListToDTOList(response.body()?.tmdbFilms))
+                    val list = Converter.convertApiListToDTOList(response.body()?.tmdbFilms)
+                    list.forEach {
+                        repo.putToDb(film = it)
+                    }
+                    callback.onSuccess(list)
                 }
 
                 override fun onFailure(call: Call<TmdbResults>, t: Throwable) {
@@ -29,4 +33,8 @@ import retrofit2.Response
         }
 
         fun getDefaultCategoryFromPreferences() = preferences.getDefaultCategory()
+
+        fun getFilmsFromDB(): List<Film> = repo.getAllFromDB()
     }
+
+

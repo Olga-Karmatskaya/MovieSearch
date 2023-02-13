@@ -17,12 +17,12 @@ import androidx.lifecycle.ViewModelProvider
 import android.widget.SearchView
 import java.util.*
 
-
 class HomeFragment : Fragment() {
     private val viewModel by lazy {
         ViewModelProvider.NewInstanceFactory().create(HomeFragmentViewModel::class.java)
     }
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
+    private lateinit var binding: FragmentHomeBinding
     private var filmsDataBase = listOf<Film>()
 
         set(value) {
@@ -30,33 +30,55 @@ class HomeFragment : Fragment() {
             field = value
             filmsAdapter.addItems(field)
         }
-    private var _binding: FragmentHomeBinding? = null
-    private  val binding get() = _binding!!
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        retainInstance = true
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+    ): View {
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
     }
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         AnimationHelper.performFragmentCircularRevealAnimation(binding.homeFragmentRoot, requireActivity(), 1)
 
+        initSearchView()
+        initPullToRefresh()
+        initRecyckler()
+
+        viewModel.filmsListLiveData.observe(viewLifecycleOwner, androidx.lifecycle.Observer<List<Film>> {
+            filmsDataBase = it
+            filmsAdapter.addItems(it)
+        })
+
+    }
+
+    private fun initPullToRefresh() {
+       binding.pullToRefresh.setOnRefreshListener {
+            filmsAdapter.items.clear()
+            viewModel.getFilms()
+            binding.pullToRefresh.isRefreshing = false
+        }
+    }
+
+    private fun initSearchView() {
         binding.searchView.setOnClickListener {
             binding.searchView.isIconified = false
         }
+
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return true
             }
+
             override fun onQueryTextChange(newText: String): Boolean {
                 if (newText.isEmpty()) {
                     filmsAdapter.addItems(filmsDataBase)
@@ -70,19 +92,21 @@ class HomeFragment : Fragment() {
                 return true
             }
         })
+    }
+
+    private fun initRecyckler() {
         binding.mainRecycler.apply {
             filmsAdapter =
                 FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener {
                     override fun click(film: Film) {
                         (requireActivity() as MainActivity).launchDetailsFragment(film)
                     }
-                }
-                )
+                })
             adapter = filmsAdapter
             layoutManager = LinearLayoutManager(requireContext())
             val decorator = TopSpacingItemDecoration(8)
             addItemDecoration(decorator)
         }
-        filmsAdapter.addItems(filmsDataBase)
     }
+
 }

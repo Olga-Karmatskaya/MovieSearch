@@ -1,8 +1,7 @@
 package com.example.moviesearch
 
 import android.app.Application
-import com.example.moviesearch.di.AppComponent
-import com.example.moviesearch.di.DaggerAppComponent
+import com.example.moviesearch.di.*
 
 class App : Application() {
     lateinit var dagger: AppComponent
@@ -10,7 +9,11 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
-        dagger = DaggerAppComponent.create()
+        dagger = DaggerAppComponent.builder()
+            .remoteModule(RemoteModule())
+            .databaseModule(DatabaseModule())
+            .domainModule(DomainModule(this))
+            .build()
     }
 
     companion object {

@@ -3,11 +3,12 @@ package com.example.moviesearch.view
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.example.moviesearch.R
 import com.example.moviesearch.databinding.ActivityMainBinding
 import com.example.moviesearch.domain.Film
-import com.example.moviesearch.view.fragments.DetailsFragment
-import com.example.moviesearch.view.fragments.HomeFragment
+import com.example.moviesearch.view.fragments.*
+
 
 class MainActivity : AppCompatActivity() {
      private lateinit var binding: ActivityMainBinding
@@ -54,8 +55,24 @@ class MainActivity : AppCompatActivity() {
                         Toast.makeText(this, "Подборки", Toast.LENGTH_SHORT).show()
                         true
                     }
+                    R.id.settings -> {
+                        val tag = "settings"
+                        val fragment = checkFragmentExistence(tag)
+                        changeFragment( fragment?: SettingsFragment(), tag)
+                        true
+                    }
                     else -> false
                 }
             }
         }
+    private fun checkFragmentExistence(tag: String): Fragment? = supportFragmentManager.findFragmentByTag(tag)
+
+    private fun changeFragment(fragment: Fragment, tag: String) {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment_placeholder, fragment, tag)
+            .addToBackStack(null)
+            .commit()
     }
+}
+

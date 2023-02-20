@@ -8,7 +8,7 @@ import com.example.moviesearch.domain.Film
 import com.example.moviesearch.view.rv_viewholders.FilmViewHolder
 
 class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private val items = mutableListOf<Film>()
+    internal val items = mutableListOf<Film>()
     override fun getItemCount() = items.size
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val binding = FilmItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)

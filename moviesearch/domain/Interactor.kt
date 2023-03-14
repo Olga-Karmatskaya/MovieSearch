@@ -1,10 +1,9 @@
 package com.example.moviesearch.domain
 
-import com.example.moviesearch.data.API
+import androidx.lifecycle.LiveData
+import com.example.moviesearch.data.*
+import com.example.moviesearch.data.Entity.Film
 import com.example.moviesearch.data.Entity.TmdbResults
-import com.example.moviesearch.data.MainRepository
-import com.example.moviesearch.data.PreferenceProvider
-import com.example.moviesearch.data.TmdbApi
 import com.example.moviesearch.viewmodel.HomeFragmentViewModel
 import com.example.moviesearch.utils.Converter
 import retrofit2.Call
@@ -17,9 +16,9 @@ import retrofit2.Response
                 override fun onResponse(call: Call<TmdbResults>, response: Response<TmdbResults>) {
                     val list = Converter.convertApiListToDTOList(response.body()?.tmdbFilms)
                     list.forEach {
-                        repo.putToDb(film = it)
+                        repo.putToDb(list)
                     }
-                    callback.onSuccess(list)
+                    callback.onSuccess()
                 }
 
                 override fun onFailure(call: Call<TmdbResults>, t: Throwable) {
@@ -34,7 +33,8 @@ import retrofit2.Response
 
         fun getDefaultCategoryFromPreferences() = preferences.getDefaultCategory()
 
-        fun getFilmsFromDB(): List<Film> = repo.getAllFromDB()
+        fun getFilmsFromDB(): LiveData<List<Film>>
+        = repo.getAllFromDB()
     }
 
 

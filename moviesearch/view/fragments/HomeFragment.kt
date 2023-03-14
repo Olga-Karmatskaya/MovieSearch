@@ -8,13 +8,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moviesearch.view.MainActivity
 import com.example.moviesearch.databinding.FragmentHomeBinding
-import com.example.moviesearch.domain.Film
+import com.example.moviesearch.data.Entity.Film
 import com.example.moviesearch.view.rv_adapters.FilmListRecyclerAdapter
 import com.example.moviesearch.view.rv_adapters.TopSpacingItemDecoration
 import com.example.moviesearch.viewmodel.HomeFragmentViewModel
 import com.example.moviesearch.utils.AnimationHelper
 import androidx.lifecycle.ViewModelProvider
 import android.widget.SearchView
+import androidx.core.view.isVisible
+import androidx.lifecycle.Observer
 import java.util.*
 
 class HomeFragment : Fragment() {
@@ -57,7 +59,9 @@ class HomeFragment : Fragment() {
             filmsDataBase = it
             filmsAdapter.addItems(it)
         })
-
+        viewModel.showProgressBar.observe(viewLifecycleOwner, Observer<Boolean> {
+            binding.progressBar.isVisible = it
+        })
     }
 
     private fun initPullToRefresh() {

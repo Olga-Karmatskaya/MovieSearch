@@ -57,4 +57,9 @@ dependencies {
     implementation 'com.google.dagger:dagger:2.44.2'
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
     kapt 'com.google.dagger:dagger-compiler:2.44.2'
+    def room_version = "2.2.6"
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2'
 }

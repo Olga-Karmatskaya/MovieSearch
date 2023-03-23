@@ -17,6 +17,10 @@ import androidx.lifecycle.ViewModelProvider
 import android.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
+import com.example.moviesearch.data.AutoDisposable
+import com.example.moviesearch.data.addTo
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 import java.util.*
@@ -25,6 +29,7 @@ class HomeFragment : Fragment() {
     private val viewModel by lazy {
         ViewModelProvider.NewInstanceFactory().create(HomeFragmentViewModel::class.java)
     }
+    private val autoDisposable = AutoDisposable()
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
     private lateinit var binding: FragmentHomeBinding
     private lateinit var scope: CoroutineScope
@@ -38,6 +43,7 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        autoDisposable.bindTo(lifecycle)
         retainInstance = true
     }
 
@@ -58,28 +64,21 @@ class HomeFragment : Fragment() {
         initPullToRefresh()
         initRecyckler()
 
-        scope = CoroutineScope(Dispatchers.IO).also { scope ->
-            scope.launch() {
-                viewModel.filmsListData.collect() {
-                    withContext(Dispatchers.Main) {
-                        filmsAdapter.addItems(it)
-                        filmsDataBase = it
-                    }
-                }
+        viewModel.filmsListData
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { list ->
+                filmsAdapter.addItems(list)
+                filmsDataBase = list
             }
-            scope.launch {
-                for (element in viewModel.showProgressBar) {
-                    launch(Dispatchers.Main) {
-                        binding.progressBar.isVisible = element
-                    }
-                }
+            .addTo(autoDisposable)
+        viewModel.showProgressBar
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                binding.progressBar.isVisible = it
             }
-        }
-    }
-
-    override fun onStop() {
-        super.onStop()
-        scope.cancel()
+            .addTo(autoDisposable)
     }
 
     private fun initPullToRefresh() {

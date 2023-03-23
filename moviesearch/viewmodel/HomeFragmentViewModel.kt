@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 import com.example.moviesearch.App
 import com.example.moviesearch.data.Entity.Film
 import com.example.moviesearch.domain.Interactor
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.subjects.BehaviorSubject
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import java.util.concurrent.Executors
@@ -15,8 +17,8 @@ class HomeFragmentViewModel : ViewModel() {
 
     @Inject
     lateinit var interactor: Interactor
-    val filmsListData: Flow<List<Film>>
-    val showProgressBar: Channel<Boolean>
+    val filmsListData: Observable<List<Film>>
+    val showProgressBar: BehaviorSubject<Boolean>
     init {
         App.instance.dagger.inject(this)
         showProgressBar = interactor.progressBarState

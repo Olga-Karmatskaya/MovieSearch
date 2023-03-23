@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.moviesearch.data.ApiConstants
 import com.example.moviesearch.databinding.FilmItemBinding
-import com.example.moviesearch.domain.Film
+import com.example.moviesearch.data.Entity.Film
 
 class FilmViewHolder(itemView: FilmItemBinding) : RecyclerView.ViewHolder(itemView.root) {
 

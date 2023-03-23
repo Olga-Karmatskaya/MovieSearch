@@ -8,21 +8,31 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moviesearch.view.MainActivity
 import com.example.moviesearch.databinding.FragmentHomeBinding
-import com.example.moviesearch.domain.Film
+import com.example.moviesearch.data.Entity.Film
 import com.example.moviesearch.view.rv_adapters.FilmListRecyclerAdapter
 import com.example.moviesearch.view.rv_adapters.TopSpacingItemDecoration
 import com.example.moviesearch.viewmodel.HomeFragmentViewModel
 import com.example.moviesearch.utils.AnimationHelper
 import androidx.lifecycle.ViewModelProvider
 import android.widget.SearchView
+import androidx.core.view.isVisible
+import androidx.lifecycle.Observer
+import com.example.moviesearch.data.AutoDisposable
+import com.example.moviesearch.data.addTo
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.collect
 import java.util.*
 
 class HomeFragment : Fragment() {
     private val viewModel by lazy {
         ViewModelProvider.NewInstanceFactory().create(HomeFragmentViewModel::class.java)
     }
+    private val autoDisposable = AutoDisposable()
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
     private lateinit var binding: FragmentHomeBinding
+    private lateinit var scope: CoroutineScope
     private var filmsDataBase = listOf<Film>()
 
         set(value) {
@@ -33,6 +43,7 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        autoDisposable.bindTo(lifecycle)
         retainInstance = true
     }
 
@@ -53,11 +64,21 @@ class HomeFragment : Fragment() {
         initPullToRefresh()
         initRecyckler()
 
-        viewModel.filmsListLiveData.observe(viewLifecycleOwner, androidx.lifecycle.Observer<List<Film>> {
-            filmsDataBase = it
-            filmsAdapter.addItems(it)
-        })
-
+        viewModel.filmsListData
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { list ->
+                filmsAdapter.addItems(list)
+                filmsDataBase = list
+            }
+            .addTo(autoDisposable)
+        viewModel.showProgressBar
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                binding.progressBar.isVisible = it
+            }
+            .addTo(autoDisposable)
     }
 
     private fun initPullToRefresh() {

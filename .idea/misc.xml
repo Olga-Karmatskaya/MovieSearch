@@ -9,8 +9,11 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/MovieSearch/app/src/main/res/drawable/background_main.xml" value="0.2405" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MovieSearch/app/src/main/res/drawable/background_search_view.xml" value="0.2405" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MovieSearch/app/src/main/res/drawable/background_selections.xml" value="0.2405" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/MovieSearch/app/src/main/res/drawable/background_settings.xml" value="0.2405" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MovieSearch/app/src/main/res/drawable/background_watch_later.xml" value="0.2405" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MovieSearch/app/src/main/res/drawable/corner_background.xml" value="0.2445" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/MovieSearch/app/src/main/res/drawable/ic_baseline_cloud_download_24.xml" value="0.2405" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/MovieSearch/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.2405" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MovieSearch/app/src/main/res/drawable/ic_launcher_background.xml" value="0.124" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MovieSearch/app/src/main/res/drawable/ic_round_favorite.xml" value="0.2445" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MovieSearch/app/src/main/res/drawable/ic_round_menu.xml" value="0.264" />
@@ -25,6 +28,7 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/MovieSearch/app/src/main/res/layout/fragment_favorites.xml" value="0.25052083333333336" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MovieSearch/app/src/main/res/layout/fragment_home.xml" value="0.11041666666666666" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MovieSearch/app/src/main/res/layout/fragment_selections.xml" value="0.25052083333333336" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/MovieSearch/app/src/main/res/layout/fragment_settings.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MovieSearch/app/src/main/res/layout/fragment_watch_later.xml" value="0.23645833333333333" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MovieSearch/app/src/main/res/layout/merge_home_screen_content.xml" value="0.25052083333333336" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MovieSearch/app/src/main/res/menu/navigation_menu.xml" value="0.253125" />
